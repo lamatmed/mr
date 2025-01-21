@@ -10,29 +10,35 @@ const nextConfig = {
     },
 };
 
-export default withSentryConfig(nextConfig, {
-    // Organization and project settings
-    org: "monapp-st", // Update to your desired org
-    project: "javascript-nextjs", // Update to your desired project
+const sentryWebpackPluginOptions = {
+    // Paramètres de l'organisation et du projet
+    org: "monapp-st", // Mettez à jour avec votre organisation
+    project: "javascript-nextjs", // Mettez à jour avec votre projet
 
-    // Only print logs for uploading source maps in CI
+    // Affiche uniquement les journaux pour le téléchargement des source maps en CI
     silent: !process.env.CI,
 
-    // Upload a larger set of source maps for prettier stack traces (increases build time)
+    // Télécharge un ensemble plus large de source maps pour obtenir des traces de pile plus lisibles (augmente le temps de build)
     widenClientFileUpload: true,
 
-    // Automatically annotate React components to show their full name in breadcrumbs and session replay
+    // Active l'annotation automatique des composants React pour afficher leur nom complet dans les breadcrumbs et la session de replay
     reactComponentAnnotation: {
         enabled: true,
     },
 
-    // Hides source maps from generated client bundles
+    // Cache les source maps dans les bundles clients générés
     hideSourceMaps: true,
 
-    // Automatically tree-shake Sentry logger statements to reduce bundle size
+    // Désactive les déclarations du logger Sentry pour réduire la taille du bundle
     disableLogger: true,
 
-    // Enables automatic instrumentation of Vercel Cron Monitors
+    // Active l'instrumentation automatique des Moniteurs Cron de Vercel
     automaticVercelMonitors: true,
 
-});
+    // Supprime les source maps après leur téléchargement
+    sourcemaps: {
+        deleteSourcemapsAfterUpload: true,
+    },
+};
+
+export default withSentryConfig(nextConfig, sentryWebpackPluginOptions);
