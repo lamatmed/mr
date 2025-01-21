@@ -12,8 +12,8 @@ const nextConfig = {
 
 export default withSentryConfig(nextConfig, {
     // Organization and project settings
-    org: "javascript-mastery", // Update to your desired org
-    project: "care-pulse", // Update to your desired project
+    org: "monapp-st", // Update to your desired org
+    project: "javascript-nextjs", // Update to your desired project
 
     // Only print logs for uploading source maps in CI
     silent: !process.env.CI,
@@ -34,4 +34,5 @@ export default withSentryConfig(nextConfig, {
 
     // Enables automatic instrumentation of Vercel Cron Monitors
     automaticVercelMonitors: true,
+
 });
